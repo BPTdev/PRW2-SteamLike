@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Game;
-use App\Http\Requests\GameFormRequest;
+use Illuminate\Http\Request;
+
 class GameController extends Controller
 {
     /**
@@ -34,7 +34,7 @@ class GameController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GameFormRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,21 +42,21 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Game $game)
     {
-        //
+        return view('games.show', ['game' => $game]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Game $game)
     {
         //
     }
@@ -65,10 +65,10 @@ class GameController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function update(GameFormRequest $request, $id)
+    public function update(Request $request, Game $game)
     {
         //
     }
@@ -76,10 +76,10 @@ class GameController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Game $game)
     {
         //
     }

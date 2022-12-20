@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('games', GameController::class)->except(['show', 'edit', 'update']);
+Route::resource('games', GameController::class)->except(['edit', 'update']);
+
 
 require __DIR__.'/auth.php';
