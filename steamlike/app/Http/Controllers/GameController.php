@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Http\Requests\GameFormRequest;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -34,7 +35,7 @@ class GameController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GameFormRequest $request)
     {
         //
     }
@@ -58,7 +59,7 @@ class GameController extends Controller
      */
     public function edit(Game $game)
     {
-        //
+        return view('games.edit', ['game' => $game]);
     }
 
     /**
@@ -68,9 +69,18 @@ class GameController extends Controller
      * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Game $game)
+    public function update(GameFormRequest $request, Game $game)
     {
-        //
+        $game = Game::find($game);
+        $game->name = $request->name;
+        $game->description = $request->description;
+        $game->price = $request->price;
+        $game->date = $request->date;
+        $game->image = $request->image;
+        $game->promotion = $request->promotion;
+        $game->save();
+
+        return redirect('games');
     }
 
     /**
