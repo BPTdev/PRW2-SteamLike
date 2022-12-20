@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('image');
             $table->string('description');
             $table->float('price');
-            $table->date('date');
+            $table->float('promotion')->nullable();
+            $table->date('published_on');
             $table->timestamps();
         });
     }
