@@ -1,10 +1,8 @@
 <x-app-layout>
-    <table class="table-auto">
-        <tr><b>Name</b></tr>
-        <tbody>
-            <tr>
-                <td>{{$game->name}}</td>
-            </tr>
-        </tbody>
-    </table>
+   <div>
+       <p>Name: {{$game->name}}</p>
+       <p>Description: {{$game->description}}</p>
+       <p>Date: {{$game->date}}</p>
+       <img src="public/images/" alt="Game's {{$game->name}} image">
+   </div>
 </x-app-layout>

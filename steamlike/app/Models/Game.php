@@ -9,6 +9,10 @@ class Game extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+  //      'date' => 'date:d.m.Y',
+    ];
+
     protected $fillable = [
         'name',
         'image',
