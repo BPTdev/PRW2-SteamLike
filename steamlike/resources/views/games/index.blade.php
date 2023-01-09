@@ -1,12 +1,19 @@
 <x-app-layout>
-    <table class="table-auto">
-        <tr><b>Name</b></tr>
+    <table class="table-auto border-collapse border border-slate-400">
+        <tr>
+            <th>Name</th>
+            <th>{{__('Release date')}}</th>
+            <th>Description</th>
+            <th>Promotion</th>
+            <th></th>
+        </tr>
         <tbody>
         @foreach($games as $game)
             <tr>
                 <td>{{$game->name}}</td>
-                <td>{{__('Release date')}} : {{$game->date}}</td>
+                <td>{{$game->published_on}}</td>
                 <td>{{$game->description}}</td>
+                <td>{{$game->promotion}}</td>
                 <td><a href="{{ route("games.show", ['game' => $game])}}">Details</a></td>
             </tr>
         @endforeach

@@ -72,13 +72,7 @@ class GameController extends Controller
     public function update(GameFormRequest $request, Game $game)
     {
 
-        $game->name = $request->name;
-        $game->description = $request->description;
-        $game->price = $request->price;
-        $game->published_on = $request->published_on;
-        $game->image = $request->image;
-        $game->promotion = $request->promotion;
-        $game->save();
+        $game->update($request->all());
 
         return redirect('games');
     }
