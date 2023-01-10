@@ -18,7 +18,6 @@ class GameFactory extends Factory
     {
         return [
             'name'         => fake()->word(),
-            'image'        => fake()->image('public/storage/images', 640, 480, null, false),
             'description'  => fake()->sentence(10),
             'price'        => fake()->randomFloat(2, 0, 200),
             'published_on' => fake()->date(),

@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('cartitems', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->float('balance')->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->float('price');
+            $table->integer('quantity');
+            $table->integer('total');
+            $table->date('purchase_date');
+            $table->foreignId('cart_id')->references('id')->on('carts');
+            $table->foreignId('game_id')->references('id')->on('games');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('cartitems');
     }
 };

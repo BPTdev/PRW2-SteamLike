@@ -6,6 +6,7 @@
             <th>Description</th>
             <th>Promotion</th>
             <th></th>
+            <th></th>
         </tr>
         <tbody>
         @foreach($games as $game)
@@ -15,6 +16,7 @@
                 <td>{{$game->description}}</td>
                 <td>{{$game->promotion}}</td>
                 <td><a href="{{ route("games.show", ['game' => $game])}}">Details</a></td>
+                <td><a href="{{ route("games.buy", ['game' => $game])}}">Buy</a></td>
             </tr>
         @endforeach
         </tbody>

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Game;
-use App\Http\Requests\GameFormRequest;
 use Illuminate\Http\Request;
 
-class GameController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +15,14 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = Game::all();
-        return view('games.index', ['games' => $games]);
-    }
 
-    public function buy(Game $game)
+        return view('carts.index', ['user'=>Auth::user()->id]);
+    }
+    public function add(Game $game)
     {
 
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -39,7 +39,7 @@ class GameController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GameFormRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -47,47 +47,44 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function show(Game $game)
+    public function show(Cart $cart)
     {
-        return view('games.show', ['game' => $game]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function edit(Game $game)
+    public function edit(Cart $cart)
     {
-        return view('games.edit', ['game' => $game]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(GameFormRequest $request, Game $game)
+    public function update(Request $request, Cart $cart)
     {
-
-        $game->update($request->all());
-
-        return redirect('games');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Game $game)
+    public function destroy(Cart $cart)
     {
         //
     }
