@@ -31,8 +31,9 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('games', GameController::class);
 Route::resource('carts', GameController::class)->except('destroy');
-Route::controller(GameController::class)->group(function () {
-    Route::get('/games.buy', 'buy');
-});
+
+Route::get('games/{game}/buy', [GameController::class, 'buy'])->name('games.buy');
+
+
 
 require __DIR__.'/auth.php';

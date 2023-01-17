@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use App\Http\Requests\GameFormRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
@@ -21,8 +23,18 @@ class GameController extends Controller
 
     public function buy(Game $game)
     {
+        $games = Game::all();
+        $user = User::find(Auth::user()->id);
+        if ($game->bye($user)) {
+            $user->games()->attach($game);
 
+            $message[0] = "You successfully bought " . $game->title;
+        } else {
+            $message[1] = "You where unable to buy " . $game->title;
+        }
+        return view('games.index', ['games' => $games, 'message' => $message]);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +48,8 @@ class GameController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(GameFormRequest $request)
@@ -47,7 +60,8 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Game  $game
+     * @param \App\Models\Game $game
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Game $game)
@@ -58,7 +72,8 @@ class GameController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Game  $game
+     * @param \App\Models\Game $game
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Game $game)
@@ -69,13 +84,13 @@ class GameController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Game  $game
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Game         $game
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(GameFormRequest $request, Game $game)
     {
-
         $game->update($request->all());
 
         return redirect('games');
@@ -84,11 +99,13 @@ class GameController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Game  $game
+     * @param \App\Models\Game $game
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Game $game)
     {
         //
     }
+
 }
