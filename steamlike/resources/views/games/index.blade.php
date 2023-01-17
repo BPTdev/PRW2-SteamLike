@@ -19,7 +19,7 @@
                 <td>{{$game->description}}</td>
                 <td>{{$game->promotion}}</td>
                 <td></td>
-                <td><a href="{{ route("games.buy",  ['game' => $game])}}">Buy</a></td>
+                <td><a onclick="confirm('Really, you want to buying {{$game->name}} ? That\'s a bad game')" href="{{ route("games.buy",  ['game' => $game])}}">Buy</a></td>
             </tr>
         @endforeach
         </tbody>

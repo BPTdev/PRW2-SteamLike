@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
@@ -19,9 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth', 'verified'])->name('home');
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -29,10 +32,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('games', GameController::class);
-Route::resource('carts', GameController::class)->except('destroy');
+Route::resource('games', GameController::class)->middleware(['auth', 'verified']);
+Route::resource('carts', GameController::class)->middleware(['auth', 'verified'])->except('destroy');
 
-Route::get('games/{game}/buy', [GameController::class, 'buy'])->name('games.buy');
+Route::get('games/{game}/buy', [GameController::class, 'buy'])->middleware(['auth', 'verified'])->name('games.buy');
 
 
 
